@@ -9,6 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Find and Replace Github Build ID placeholder
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "#GITHUB-ACTION-BUILD-ID#"
+          replace: "${{ github.head_ref }}.${{ github.sha }}"
+          regex: false
+      - name: Find and Replace Github Build Link placeholder
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "#GITHUB-ACTION-BUILD-LINK#"
+          replace: "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          regex: false
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
