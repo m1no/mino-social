@@ -21,7 +21,7 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v2
         with:
           find: "#GITHUB-ACTION-BUILD-LINK#"
-          replace: "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          replace: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           regex: false
       - name: Deploy to the live page
         uses: FirebaseExtended/action-hosting-deploy@v0
